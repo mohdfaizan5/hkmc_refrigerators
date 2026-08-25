@@ -6,6 +6,8 @@ dist/
 # dependencies
 node_modules/
 
+/devgrad.html
+
 # logs
 npm-debug.log*
 yarn-debug.log*

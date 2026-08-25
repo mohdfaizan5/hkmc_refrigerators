@@ -36,9 +36,9 @@ const usps = [
 				const Wrapper = usp.href ? 'a' : 'div';
 				return (
 				<Wrapper href={usp.href} class="group flex items-start gap-3">
-					<span class="flex size-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-zinc-200">
+					<span class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary ring-1 ring-zinc-200">
 						{usp.icon === 'badge' && (
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-zinc-900">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-white">
 								<path
 									stroke-linecap="round"
 									stroke-linejoin="round"
@@ -47,7 +47,7 @@ const usps = [
 							</svg>
 						)}
 						{usp.icon === 'cube' && (
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-zinc-900">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-white">
 								<path
 									stroke-linecap="round"
 									stroke-linejoin="round"
@@ -56,12 +56,12 @@ const usps = [
 							</svg>
 						)}
 						{usp.icon === 'shield' && (
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-zinc-900">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-white">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M12 3.25 5 5.75v5.5c0 4.5 3 7.75 7 9.5 4-1.75 7-5 7-9.5v-5.5L12 3.25Z" />
 							</svg>
 						)}
 						{usp.icon === 'clock' && (
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-zinc-900">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5 text-white">
 								<circle cx="12" cy="12" r="8.25" />
 								<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4.5l3 1.75" />
 							</svg>

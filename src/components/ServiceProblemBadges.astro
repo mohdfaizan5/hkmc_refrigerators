@@ -16,7 +16,10 @@ const { service } = Astro.props;
 	{
 		service.problems.map((problem) => (
 			<a href={problemLinks[problem] ?? '/#book'}>
-				<Badge className="inline-block rounded-full border border-zinc-200 px-3 pb-2.5 text-sm transition-colors">
+				<Badge
+					variant="outline"
+					className="inline-block rounded-full border border-zinc-200 bg-white px-3 pb-2.5 text-sm text-zinc-700 transition-colors hover:border-zinc-300 hover:bg-zinc-50"
+				>
 					{problem}
 				</Badge>
 			</a>

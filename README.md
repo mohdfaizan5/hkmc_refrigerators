@@ -1,7 +1,7 @@
 "10,000+ repairs completed" and "<60 min avg. response time"
 
 
-
+#146EF5 - primary color 
 ---
 
 Features:

@@ -24,7 +24,8 @@
 	--card-foreground: oklch(0.145 0 0);
 	--popover: oklch(1 0 0);
 	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
+	--primary: oklch(57.3% 0.218 259.8);
+	/* --primary: oklch(0.205 0 0); */
 	--primary-foreground: oklch(0.985 0 0);
 	--secondary: oklch(0.97 0 0);
 	--secondary-foreground: oklch(0.205 0 0);
@@ -70,7 +71,8 @@
 	--card-foreground: oklch(0.985 0 0);
 	--popover: oklch(0.205 0 0);
 	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.922 0 0);
+	/* --primary: oklch(0.922 0 0); */
+	--primary: oklch(57.3% 0.218 259.8);
 	--primary-foreground: oklch(0.205 0 0);
 	--secondary: oklch(0.269 0 0);
 	--secondary-foreground: oklch(0.985 0 0);
@@ -215,10 +217,16 @@
 	b {
 		font-weight: 700;
 	}
-	a {
+	/*
+	  Only long-form article content (blog posts, /about prose) gets the
+	  auto-blue link styling. Marketing pages set their own link colors
+	  via Tailwind utilities; painting every bare <a> blue at the base
+	  layer bled into headers, footers, and CTAs where it wasn't wanted.
+	 */
+	.prose a {
 		color: var(--primary);
 	}
-	a:hover {
+	.prose a:hover {
 		color: var(--primary);
 	}
 	p {

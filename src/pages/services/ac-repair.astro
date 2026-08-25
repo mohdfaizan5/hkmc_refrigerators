@@ -7,8 +7,15 @@ import Header from "../../components/Header.astro";
 import ServiceCard from "../../components/ServiceCard.astro";
 import ServiceProblemBadges from "../../components/ServiceProblemBadges.astro";
 import TrustStrip from "../../components/TrustStrip.astro";
-import { BRAND_NAME, CITY, CITY_FORMAL, PHONE_DISPLAY, PHONE_HREF } from "../../consts";
+import {
+  BRAND_NAME,
+  CITY,
+  CITY_FORMAL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+} from "../../consts";
 import { getService, serviceCategories } from "../../data/services";
+import TestimonialSimple from "@/components/TestimonialSimple.astro";
 
 const service = getService("ac-repair")!;
 const otherServices = serviceCategories.filter((s) => s.slug !== service.slug);
@@ -93,7 +100,7 @@ const breadcrumbSchema = {
               Now serving {CITY}
             </p>
             <h1
-              class="mt-3 text-4xl leading-[1.1] font-extrabold tracking-tight text-zinc-950 sm:text-5xl"
+              class="mt-3 text-4xl leading-[1.1] font-bold tracking-tight text-zinc-950 sm:text-5xl"
             >
               {service.name} in {CITY}
             </h1>
@@ -158,25 +165,36 @@ const breadcrumbSchema = {
 
       <!-- Free tools -->
       <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-        <div class="grid gap-6 rounded-2xl border border-zinc-200 p-6 sm:grid-cols-2 sm:p-8">
+        <div
+          class="grid gap-6 rounded-2xl border border-zinc-200 p-6 sm:grid-cols-2 sm:p-8"
+        >
           <a href="/tools/ac-tonnage-calculator/" class="group">
-            <h3 class="text-lg font-semibold text-zinc-950 group-hover:underline">
+            <h3
+              class="text-lg font-semibold text-zinc-950 group-hover:underline"
+            >
               Not sure what size AC you need?
             </h3>
             <p class="mt-1.5 text-sm text-zinc-600">
-              Try our free AC Tonnage Calculator — enter your room size for an instant recommendation.
+              Try our free AC Tonnage Calculator — enter your room size for an
+              instant recommendation.
             </p>
           </a>
           <a href="/tools/ac-running-cost-calculator/" class="group">
-            <h3 class="text-lg font-semibold text-zinc-950 group-hover:underline">
+            <h3
+              class="text-lg font-semibold text-zinc-950 group-hover:underline"
+            >
               Wondering what your AC is costing you?
             </h3>
             <p class="mt-1.5 text-sm text-zinc-600">
-              Try our free AC Running Cost Calculator to estimate your monthly electricity bill.
+              Try our free AC Running Cost Calculator to estimate your monthly
+              electricity bill.
             </p>
           </a>
         </div>
       </section>
+      
+      <TestimonialSimple />
+
 
       <!-- Other services -->
       <section class="bg-zinc-50 py-16 lg:py-24">
@@ -186,21 +204,24 @@ const breadcrumbSchema = {
           >
             Other services we offer
           </h2>
-          <div class="mt-10 flex flex-wrap gap-6">
+          <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:flex-wrap lg:gap-6">
             {
               otherServices.map((other) => (
-                <ServiceCard service={other} href={`/services/${other.slug}/`} />
+                <ServiceCard
+                  service={other}
+                  href={`/services/${other.slug}/`}
+                />
               ))
             }
           </div>
         </div>
       </section>
 
-      <CTASimple
+      <!-- <CTASimple
         PHONE_DISPLAY={PHONE_DISPLAY}
         PHONE_HREF={PHONE_HREF}
         CITY={CITY}
-      />
+      /> -->
       <!-- Final CTA -->
       <section class="bg-zinc-950">
         <div

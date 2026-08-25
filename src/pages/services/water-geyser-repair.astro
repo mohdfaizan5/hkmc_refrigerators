@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import ServiceProblemBadges from '../../components/ServiceProblemBadges.astro';
+import TestimonialSimple from '../../components/TestimonialSimple.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
 import { BRAND_NAME, CITY, CITY_FORMAL, PHONE_DISPLAY, PHONE_HREF } from '../../consts';
 import { getService, serviceCategories } from '../../data/services';
@@ -63,7 +64,7 @@ const breadcrumbSchema = {
 				<div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
 					<div>
 						<p class="text-sm font-semibold tracking-wide text-zinc-500 uppercase">Now serving {CITY}</p>
-						<h1 class="mt-3 text-4xl leading-[1.1] font-extrabold tracking-tight text-zinc-950 sm:text-5xl">
+						<h1 class="mt-3 text-4xl leading-[1.1] font-bold tracking-tight text-zinc-950 sm:text-5xl">
 							{service.name} in {CITY}
 						</h1>
 						<p class="mt-5 max-w-xl text-lg leading-7 text-zinc-600">{subheading}</p>
@@ -112,11 +113,13 @@ const breadcrumbSchema = {
 				</div>
 			</section>
 
+			<TestimonialSimple />
+
 			<!-- Other services -->
 			<section class="bg-zinc-50 py-16 lg:py-24">
 				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<h2 class="text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl">Other services we offer</h2>
-					<div class="mt-10 flex flex-wrap gap-6">
+					<div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:flex-wrap lg:gap-6">
 						{otherServices.map((other) => <ServiceCard service={other} href={`/services/${other.slug}/`} />)}
 					</div>
 				</div>

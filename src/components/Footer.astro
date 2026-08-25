@@ -9,7 +9,7 @@ const today = new Date();
 	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
 		<div class="grid grid-cols-2 gap-10 md:grid-cols-4">
 			<div class="col-span-2 md:col-span-1">
-				<a href="/" class="text-lg font-extrabold tracking-tight text-zinc-900">
+				<a href="/" class="text-lg font-bold tracking-tight text-zinc-900">
 					HKMC<span class="font-normal text-zinc-500">Refrigerators</span>
 				</a>
 				<p class="mt-3 max-w-xs text-sm leading-6 text-zinc-600">
@@ -37,6 +37,7 @@ const today = new Date();
 				<h3 class="text-2xl font-semibold text-zinc-900">Company</h3>
 				<ul class="mt-4 space-y-1">
 					<li><a href="/about/" class="text-sm text-zinc-600 hover:text-zinc-900">About us</a></li>
+					<li><a href="/technicians/" class="text-sm text-zinc-600 hover:text-zinc-900">Our technicians</a></li>
 					<li><a href="/blog/" class="text-sm text-zinc-600 hover:text-zinc-900">Blog</a></li>
 					<li><a href="/tools/" class="text-sm text-zinc-600 hover:text-zinc-900">Free Tools</a></li>
 					<li><a href="/#faq" class="text-sm text-zinc-600 hover:text-zinc-900">FAQs</a></li>
@@ -49,8 +50,8 @@ const today = new Date();
 			<div>
 				<h3 class="text-2xl font-semibold text-zinc-900">Get in touch</h3>
 				<ul class="mt-4 space-y-1 text-sm text-zinc-600">
-					<li><a href={PHONE_HREF} class="hover:text-zinc-900">{PHONE_DISPLAY}</a></li>
-					<li><a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-zinc-900">{CONTACT_EMAIL}</a></li>
+					<li><a href={PHONE_HREF} class="text-zinc-600 hover:text-zinc-900">{PHONE_DISPLAY}</a></li>
+					<li><a href={`mailto:${CONTACT_EMAIL}`} class="text-zinc-600 hover:text-zinc-900">{CONTACT_EMAIL}</a></li>
 					<li>{SERVICE_HOURS}</li>
 					<li>Serving all of {CITY}, Karnataka</li>
 				</ul>
