@@ -3,6 +3,7 @@ title: "Freezer Is Fine But the Fridge Isn't Cooling? Here's Why"
 description: "Freezer fine but the fridge section is warm? One of the most common refrigerator complaints — what usually causes it and how it's fixed."
 author: 'HKMC Technical Team'
 pubDate: 'Jul 14 2026'
+updatedDate: 'Sep 05 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'
 ---
 
@@ -44,3 +45,8 @@ A loose or torn door gasket lets warm air in continuously, which the airflow fro
 If vents are clear and the door seals properly but the fridge is still warm, the issue is likely the evaporator fan, defrost system, or damper — all of which need the fridge partially opened up to diagnose and repair safely. If your AC has a similar cooling complaint, the causes are different — see [AC not cooling: 7 common causes](/blog/ac-not-cooling-common-causes/).
 
 **Fridge acting up in Bangalore?** [Book a refrigerator repair](/#book) and a verified technician will diagnose it on the spot, with an upfront quote before any work begins.
+
+## Sources
+
+- Household refrigerator design, safety and performance standards in India: [Bureau of Indian Standards (BIS)](https://www.bis.gov.in/) — IS 1476 series for household refrigerating appliances.
+- Refrigerator energy-efficiency ratings: [BEE Star Labelling Programme](https://www.beestarlabel.com/).

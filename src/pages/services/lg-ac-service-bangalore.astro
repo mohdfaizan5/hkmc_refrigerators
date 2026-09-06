@@ -1,0 +1,380 @@
+---
+import { Image } from "astro:assets";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import TestimonialSimple from "../../components/TestimonialSimple.astro";
+import TrustStrip from "../../components/TrustStrip.astro";
+import { getService } from "../../data/services";
+import {
+  BRAND_NAME,
+  CITY,
+  CITY_FORMAL,
+  CONTACT_EMAIL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+} from "../../consts";
+
+const service = getService("ac-repair")!;
+
+const title = `LG AC Service & Repair in ${CITY_FORMAL} | ${BRAND_NAME}`;
+const description = `LG split, window and dual-inverter AC service in ${CITY_FORMAL} — gas refill, PCB and compressor repair, installation. Verified technicians, 30-day warranty, ${service.visitFee}.`;
+
+const lgFaqs = [
+  {
+    q: "Does LG's own service warranty cover a third-party repair?",
+    a: "If your LG AC is still inside its brand warranty period (typically 1 year comprehensive + up to 10 years on the compressor, depending on the model), start with LG's authorised service. For out-of-warranty units — and any job LG will not send someone for within your required timeline — a third-party repair from a verified technician is a valid option. HKMC uses OEM-equivalent parts and gives a 30-day repair warranty on the same fault.",
+  },
+  {
+    q: "What are the most common LG AC problems in Bangalore?",
+    a: "Bangalore's mixed humid-dry seasons and voltage fluctuations tend to surface a few LG faults more often than others: E1/E2 error codes (sensor faults), dual-inverter PCB failure after a voltage spike, gas leak at the flare joint of the outdoor unit, and drainage-line blockage during monsoon. Most of these are same-day fixes once the fault code is diagnosed.",
+  },
+  {
+    q: "How much does LG AC gas refill cost in Bangalore?",
+    a: "For a leak-fixed LG split AC using R32 refrigerant, gas charging typically costs ₹1,800 – ₹3,500 depending on tonnage (1 ton vs 1.5 vs 2 ton). Older R410A models run slightly higher. Note: if a technician suggests a refill without first locating the leak, that's a red flag — refrigerant doesn't get 'used up' in a sealed system.",
+  },
+  {
+    q: "Do you service LG dual-inverter models?",
+    a: "Yes — dual-inverter and Wi-Fi-enabled LG models included. These have more sensitive PCBs than fixed-speed units, so we test the input voltage, check the stabiliser (if any), and only replace the board when the failure is confirmed rather than guessed at.",
+  },
+  {
+    q: "Can you install a new LG split AC?",
+    a: "Yes. LG-approved installation includes wall drilling, standard 3-metre copper piping, drainage routing, indoor and outdoor mounting, vacuum test and a cooling test. Additional piping is billed per metre. We can also handle uninstallation-and-reinstall if you're moving within Bangalore.",
+  },
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "LG AC Service and Repair",
+  brand: {
+    "@type": "Brand",
+    name: "LG",
+  },
+  provider: {
+    "@type": "HomeAndConstructionBusiness",
+    name: BRAND_NAME,
+    telephone: PHONE_HREF.replace("tel:", ""),
+    email: CONTACT_EMAIL,
+    url: Astro.site?.toString(),
+  },
+  areaServed: {
+    "@type": "City",
+    name: CITY_FORMAL,
+  },
+  description,
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: lgFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: [".faq-answer"],
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: new URL("/", Astro.site).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: new URL("/services", Astro.site).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "LG AC Service",
+      item: new URL(Astro.url.pathname, Astro.site).toString(),
+    },
+  ],
+};
+
+const lgIssues = [
+  {
+    title: "E1 / E2 / CH error codes",
+    description:
+      "Sensor faults — typically the room-temperature or coil sensor. Cleared with sensor replacement once diagnosed.",
+  },
+  {
+    title: "Dual-inverter PCB failure",
+    description:
+      "Common after a voltage spike. Board replacement or, where possible, component-level repair.",
+  },
+  {
+    title: "Gas leak at flare joint",
+    description:
+      "Bangalore installations often need flare re-doing after 3-4 years. Fix, vacuum-test, then recharge.",
+  },
+  {
+    title: "Weak cooling / long cycles",
+    description:
+      "Usually a clogged coil, low refrigerant from a leak, or a failing capacitor — not always 'gas refill'.",
+  },
+  {
+    title: "Water leaking indoors",
+    description:
+      "Blocked drain pipe, especially in monsoon. Clean-out and re-slope of the drainage line.",
+  },
+  {
+    title: "Remote / Wi-Fi not responding",
+    description:
+      "Remote sensor issue, PCB IR receiver, or Wi-Fi module — diagnosis rules out the cheap fixes first.",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <BaseHead title={title} description={description} image={service.image} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(serviceSchema)}
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <style>
+      main {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-zinc-900">
+    <Header />
+    <main>
+      <!-- Hero -->
+      <section
+        class="mx-auto max-w-7xl px-4 pt-10 pb-14 sm:px-6 lg:px-8 lg:pt-16 lg:pb-20"
+      >
+        <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <nav aria-label="Breadcrumb" class="text-sm text-zinc-500">
+              <a href="/" class="hover:text-zinc-900">Home</a>
+              <span class="mx-2">/</span>
+              <a href="/services/" class="hover:text-zinc-900">Services</a>
+              <span class="mx-2">/</span>
+              <span class="text-zinc-900">LG AC Service</span>
+            </nav>
+            <h1
+              class="mt-4 text-4xl leading-[1.1] font-extrabold tracking-tight text-zinc-950 sm:text-5xl"
+            >
+              LG AC Service & Repair in {CITY_FORMAL}
+            </h1>
+            <!-- 40-60 word direct answer, tuned for AI-Overview extraction -->
+            <p class="mt-5 max-w-xl text-lg leading-7 text-zinc-600">
+              Out-of-warranty LG AC repair across {CITY}. Split, window and
+              dual-inverter models — gas refill after leak-fix, PCB replacement,
+              compressor and capacitor issues, installation and Wi-Fi module
+              repair. Verified technicians, transparent quotes, {service.visitFee}
+              , and a 30-day warranty on the same fault.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="/#book"
+                class="rounded-full bg-zinc-900 px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-zinc-700"
+              >
+                Book LG AC Repair
+              </a>
+              <a
+                href={PHONE_HREF}
+                class="flex items-center gap-2 rounded-full border border-zinc-300 px-7 py-3.5 text-base font-semibold text-zinc-900 transition-colors hover:border-zinc-900"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="size-4"
+                >
+                  <path
+                    d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1.02z"
+                  ></path>
+                </svg>
+                Call {PHONE_DISPLAY}
+              </a>
+            </div>
+            <p class="mt-6 text-sm font-semibold text-zinc-900">
+              {service.visitFee} · Adjusted against your final quote
+            </p>
+          </div>
+          <Image
+            src={service.image}
+            alt="LG AC service in Bangalore"
+            width={700}
+            height={500}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="aspect-4/3 w-full rounded-2xl object-cover"
+          />
+        </div>
+      </section>
+
+      <TrustStrip />
+
+      <!-- LG model coverage -->
+      <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div class="max-w-3xl">
+          <h2
+            class="text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl"
+          >
+            LG models we service
+          </h2>
+          <p class="mt-4 text-lg leading-7 text-zinc-600">
+            LG's range in India is largely built around three families —
+            <strong>fixed-speed</strong> (older 3-star and 5-star models),
+            <strong>dual-inverter</strong> (the mainstream current line, both
+            5-star and 3-star), and the <strong>Wi-Fi / ThinQ</strong> range
+            (dual-inverter with app control). We service all three, plus LG
+            window ACs and the older LG split units that are now past LG's own
+            service window.
+          </p>
+        </div>
+      </section>
+
+      <!-- Common LG issues — one grid, each item = one extractable answer -->
+      <section
+        class="mx-auto max-w-7xl border-t border-zinc-200 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+      >
+        <h2 class="text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl">
+          Common LG AC problems we fix
+        </h2>
+        <p class="mt-3 max-w-2xl text-base text-zinc-600">
+          The faults our technicians see most often on LG units in {CITY} —
+          each with a real fix, not a "call for quote" placeholder.
+        </p>
+        <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            lgIssues.map((issue) => (
+              <div class="rounded-2xl border border-zinc-200 p-6">
+                <h3 class="text-lg font-semibold text-zinc-950">
+                  {issue.title}
+                </h3>
+                <p class="mt-2 text-sm leading-6 text-zinc-600">
+                  {issue.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <TestimonialSimple />
+
+      <!-- FAQ -->
+      <section id="faq" class="bg-zinc-50 py-16 lg:py-24">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2
+            class="text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl"
+          >
+            LG AC service — frequently asked questions
+          </h2>
+          <div
+            class="mt-8 divide-y divide-zinc-200 rounded-2xl bg-white ring-1 ring-zinc-200"
+          >
+            {
+              lgFaqs.map((faq) => (
+                <details class="group p-5 open:bg-zinc-50/60 first:rounded-t-2xl last:rounded-b-2xl">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-zinc-950">
+                    {faq.q}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      class="size-5 shrink-0 text-zinc-500 transition-transform group-open:rotate-45"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 4.5v15m7.5-7.5h-15"
+                      />
+                    </svg>
+                  </summary>
+                  <p class="faq-answer mt-3 text-sm leading-6 text-zinc-600">{faq.a}</p>
+                </details>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Cross-link to general AC service -->
+      <section
+        class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+      >
+        <div
+          class="flex flex-col items-start gap-6 rounded-2xl border border-zinc-200 p-8 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div>
+            <h2 class="text-xl font-semibold text-zinc-950">
+              Not an LG AC?
+            </h2>
+            <p class="mt-1 text-sm text-zinc-600">
+              We service all major brands — Samsung, Voltas, Daikin, Blue Star,
+              Whirlpool, Hitachi, Panasonic and more. Head to the general AC
+              service overview.
+            </p>
+          </div>
+          <a
+            href="/services/ac-repair/"
+            class="shrink-0 rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-semibold text-zinc-900 transition-colors hover:border-zinc-900"
+          >
+            AC Repair overview →
+          </a>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="bg-zinc-950">
+        <div
+          class="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-20"
+        >
+          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            LG AC playing up? Book a technician today.
+          </h2>
+          <p class="mx-auto mt-3 max-w-xl text-zinc-400">
+            Verified technicians, OEM-equivalent parts, transparent quotes —
+            across all of {CITY}.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="/#book"
+              class="rounded-full bg-white px-7 py-3.5 text-base font-semibold text-zinc-950 transition-colors hover:bg-zinc-200"
+            >
+              Book LG AC Repair
+            </a>
+            <a
+              href={PHONE_HREF}
+              class="rounded-full border border-white/30 px-7 py-3.5 text-base font-semibold text-white transition-colors hover:border-white"
+            >
+              Call {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

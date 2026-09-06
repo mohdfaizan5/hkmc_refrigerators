@@ -20,12 +20,12 @@ const technicians = [
   },
   {
     name: "Nisar",
-    role: "Technician, HKMC Refrigerators",
+    role: "Washing Machine Expert, 10+ Years of Experience",
     image: nisarPhoto,
   },
   {
     name: "Farooq",
-    role: "Technician, HKMC Refrigerators",
+    role: "Washing Machine Expert, 10+ Years of Experience",
     image: farooqPhoto,
   }
 ];
@@ -71,16 +71,43 @@ const breadcrumbSchema = {
     },
   ],
 };
+
+// Person schema per technician — gives Google and AI answer engines an
+// explicit entity for each named person on the team, tied to the HKMC
+// Organization via worksFor. Image URLs use Astro's optimized asset paths
+// (webp, ~30KB) so crawlers get a resolvable image, not the 1.4MB PNG source.
+// Names, roles and photos are read from the same `technicians` array that
+// renders the visible cards — no drift possible.
+const personSchemas = technicians.map((tech) => ({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: tech.name,
+  jobTitle: tech.role,
+  image: new URL(tech.image.src, Astro.site).toString(),
+  worksFor: {
+    "@type": "Organization",
+    name: BRAND_NAME,
+    url: Astro.site?.toString(),
+  },
+}));
 ---
 
 <!doctype html>
 <html lang="en-IN">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={nadeemPhoto} />
     <script
       type="application/ld+json"
       set:html={JSON.stringify(breadcrumbSchema)}
     />
+    {
+      personSchemas.map((schema) => (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(schema)}
+        />
+      ))
+    }
     <style>
       main {
         width: 100%;

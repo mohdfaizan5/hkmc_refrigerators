@@ -3,7 +3,21 @@ title: 'Washing Machine Not Draining? Try This Before You Book a Repair'
 description: "Water stuck in the drum after a wash cycle? What usually causes a washing machine to stop draining, what to check yourself, and when to call a technician."
 author: 'HKMC Technical Team'
 pubDate: 'Jul 22 2026'
+updatedDate: 'Sep 05 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+howToSteps:
+  - name: 'Check the display for a drain error code'
+    text: 'Most washing machines flash a specific error code when drainage fails — usually an "E" code (E20, LE, OE depending on brand). If a code is showing, note it before doing anything else; it narrows down which subsystem failed.'
+  - name: 'Inspect the drain hose behind the machine'
+    text: 'Pull the machine forward gently and look at the drain hose. A sharp kink, a section pinned against the wall, or a hose crushed under a leg is enough to stop drainage completely. Straighten any kinks and re-route the hose so it has a clear path with an upward loop before descending to the drain point.'
+  - name: 'Open the drain pump filter and clear it'
+    text: 'Most front-load washing machines have a small access panel near the bottom-front. Place a shallow tray underneath (expect 200-500 ml of water to come out), unscrew the filter cap slowly, and remove any lint, coins, buttons or hair blocking it. Screw it back in firmly. This alone resolves the majority of drainage complaints.'
+  - name: 'Confirm the wash setting is not one that intentionally holds water'
+    text: 'Some cycles — "hand wash", "delicate", "soak" — pause with water in the drum by design. Switch to a standard cotton or spin cycle and try again before assuming a fault.'
+  - name: 'Check that the household drain point is clear'
+    text: 'If the machine drains fine but water pools around it, the drain point in the wall or floor may be blocked. A nearby sink also draining slowly is the giveaway. Clear that first before booking a machine repair.'
+  - name: 'If none of the above worked, book a technician'
+    text: 'If the filter is clear, the hose has no kink, and no wash setting is holding water, the drain pump motor or the control board has likely failed. Both need a technician to test and replace safely.'
 ---
 
 A washing machine that finishes its cycle with water still sitting in the drum is one of the most common service calls we get — and one of the few appliance problems where a quick check can sometimes save you a repair visit altogether.
@@ -44,3 +58,7 @@ If the filter is clear and the hose isn't kinked but water still won't drain, th
 For a broader look at keeping appliances running smoothly between repairs, see our [AC maintenance checklist for Bangalore homes](/blog/ac-maintenance-checklist-bangalore/).
 
 **Washing machine stuck mid-cycle?** [Book a washing machine repair](/#book) in Bangalore and we'll get it draining — and spinning — again.
+
+## Sources
+
+- Washing machine energy and water efficiency ratings: [BEE Star Labelling Programme](https://www.beestarlabel.com/), Bureau of Energy Efficiency, Government of India.

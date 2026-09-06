@@ -22,6 +22,7 @@ import {
   SITE_DESCRIPTION,
   SITE_TITLE,
 } from "../consts";
+import { areas } from "../data/areas";
 import { serviceCategories } from "../data/services";
 
 const heroImages = [
@@ -70,24 +71,9 @@ const stats = [
   { value: "30-Day", label: "Service warranty" },
 ];
 
-const neighborhoods = [
-  "Koramangala",
-  "Indiranagar",
-  "HSR Layout",
-  "Whitefield",
-  "Jayanagar",
-  "Marathahalli",
-  "JP Nagar",
-  "Electronic City",
-  "BTM Layout",
-  "Malleswaram",
-  "Yelahanka",
-  "Bellandur",
-  "Hebbal",
-  "Banashankari",
-  "Sarjapur Road",
-  "RT Nagar",
-];
+// Now driven by the shared areas list — chips with a live area page become
+// links, ones without stay as text (so we're not shipping 404s).
+const neighborhoods = areas;
 
 const faqs = [
   {
@@ -164,6 +150,37 @@ const faqSchema = {
       text: faq.a,
     },
   })),
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: [".faq-answer"],
+  },
+};
+
+// WebSite schema — declares the site as an entity for Google Knowledge Graph
+// and gives AI agents an unambiguous root entity to attach the Organization,
+// blog, and services to. Explicitly marks no on-site search endpoint via a
+// SearchAction pointing at the booking flow — voice assistants that ask "search
+// HKMC for X" will land at /#book, which is genuinely the primary intent path
+// on this site (we don't have on-site search).
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BRAND_NAME,
+  alternateName: "HKMC",
+  url: Astro.site?.toString(),
+  inLanguage: "en-IN",
+  publisher: {
+    "@type": "Organization",
+    name: BRAND_NAME,
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${Astro.site?.toString()}?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 const howToSchema = {
@@ -189,6 +206,10 @@ const howToSchema = {
     />
     <!-- Bing Webmaster Tools site verification -->
     <meta name="msvalidate.01" content="D8C974E396695EB016C6C683C17A5E85" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(webSiteSchema)}
+    />
     <script
       type="application/ld+json"
       set:html={JSON.stringify(localBusinessSchema)}
@@ -536,8 +557,19 @@ const howToSchema = {
         <ul class="mt-8 flex flex-wrap gap-2.5">
           {
             neighborhoods.map((area) => (
-              <li class="rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700">
-                {area}
+              <li>
+                {area.hasAreaPage ? (
+                  <a
+                    href={`/services/ac-repair-in-${area.slug}/`}
+                    class="inline-block rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-200 hover:text-zinc-950"
+                  >
+                    {area.name}
+                  </a>
+                ) : (
+                  <span class="inline-block rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700">
+                    {area.name}
+                  </span>
+                )}
               </li>
             ))
           }
@@ -575,7 +607,7 @@ const howToSchema = {
                       />
                     </svg>
                   </summary>
-                  <p class="mt-3 text-sm leading-6 text-zinc-600">{faq.a}</p>
+                  <p class="faq-answer mt-3 text-sm leading-6 text-zinc-600">{faq.a}</p>
                 </details>
               ))
             }

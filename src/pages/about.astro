@@ -52,6 +52,42 @@ const organizationSchema = {
   url: Astro.site?.toString(),
   description,
 };
+
+// AboutPage explicitly marks this URL as the "about" page for the Organization
+// entity — helps Google's Knowledge Graph, AI answer engines, and Rich Results
+// pick up the right page when someone searches "about HKMC Refrigerators".
+// mainEntity points back to the Organization, tying the two schemas together.
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: `About ${BRAND_NAME}`,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  description,
+  mainEntity: {
+    "@type": "Organization",
+    name: BRAND_NAME,
+    url: Astro.site?.toString(),
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: new URL("/", Astro.site).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "About",
+      item: new URL(Astro.url.pathname, Astro.site).toString(),
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -60,7 +96,15 @@ const organizationSchema = {
     <BaseHead title={title} description={description} image={heroImage} />
     <script
       type="application/ld+json"
+      set:html={JSON.stringify(aboutPageSchema)}
+    />
+    <script
+      type="application/ld+json"
       set:html={JSON.stringify(organizationSchema)}
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
     />
     <style>
       main {

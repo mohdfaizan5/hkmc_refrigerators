@@ -1,0 +1,73 @@
+---
+// Renders the visible FAQ accordion AND the matching FAQPage JSON-LD in one place.
+// Callers pass a `faqs` array (from src/data/services.ts serviceFaqs map, or an
+// inline list) plus an optional heading. Keeping schema+markup in one component
+// means they can't drift apart — a Q added/edited/removed in the data file always
+// updates both the visible accordion and the crawlable JSON-LD at the same time.
+//
+// Speakable schema is included on the FAQ answer paragraphs — the .faq-answer
+// class below is what Speakable's cssSelector points to, so voice assistants
+// and AI answer engines get an explicit hint about which passages are the
+// direct answers.
+
+interface FAQ {
+	q: string;
+	a: string;
+}
+
+interface Props {
+	faqs: FAQ[];
+	heading?: string;
+}
+
+const { faqs, heading = 'Frequently asked questions' } = Astro.props;
+
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((faq) => ({
+		'@type': 'Question',
+		name: faq.q,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: faq.a,
+		},
+	})),
+	speakable: {
+		'@type': 'SpeakableSpecification',
+		cssSelector: ['.faq-answer'],
+	},
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section class="bg-zinc-50 py-16 lg:py-24">
+	<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+		<h2 class="text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl">
+			{heading}
+		</h2>
+		<div class="mt-8 divide-y divide-zinc-200 rounded-2xl bg-white ring-1 ring-zinc-200">
+			{
+				faqs.map((faq) => (
+					<details class="group p-5 open:bg-zinc-50/60 first:rounded-t-2xl last:rounded-b-2xl">
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-zinc-950">
+							{faq.q}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								class="size-5 shrink-0 text-zinc-500 transition-transform group-open:rotate-45"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+							</svg>
+						</summary>
+						<p class="faq-answer mt-3 text-sm leading-6 text-zinc-600">{faq.a}</p>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</section>

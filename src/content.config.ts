@@ -15,6 +15,18 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
+			// Optional DIY-style step list. When present, BlogPost.astro also emits
+			// a HowTo JSON-LD alongside the BlogPosting schema — this is what makes
+			// step-by-step troubleshooting posts eligible for Google's HowTo rich
+			// result and gives AI answer engines an explicit ordered instruction set.
+			howToSteps: z
+				.array(
+					z.object({
+						name: z.string(),
+						text: z.string(),
+					}),
+				)
+				.optional(),
 		}),
 });
 

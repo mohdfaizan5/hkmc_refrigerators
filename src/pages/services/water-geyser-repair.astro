@@ -8,7 +8,8 @@ import ServiceProblemBadges from '../../components/ServiceProblemBadges.astro';
 import TestimonialSimple from '../../components/TestimonialSimple.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
 import { BRAND_NAME, CITY, CITY_FORMAL, PHONE_DISPLAY, PHONE_HREF } from '../../consts';
-import { getService, serviceCategories } from '../../data/services';
+import ServiceFAQ from '../../components/ServiceFAQ.astro';
+import { getService, serviceCategories, serviceFaqs } from '../../data/services';
 
 const service = getService('water-geyser-repair')!;
 const otherServices = serviceCategories.filter((s) => s.slug !== service.slug);
@@ -44,7 +45,7 @@ const breadcrumbSchema = {
 <!doctype html>
 <html lang="en-IN">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={service.image} />
 		<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 		<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 		<style>
@@ -114,6 +115,8 @@ const breadcrumbSchema = {
 			</section>
 
 			<TestimonialSimple />
+
+			<ServiceFAQ faqs={serviceFaqs[service.slug] ?? []} />
 
 			<!-- Other services -->
 			<section class="bg-zinc-50 py-16 lg:py-24">

@@ -3,6 +3,7 @@ title: 'AC Not Cooling? 7 Common Causes (And When to Call a Technician)'
 description: 'Split and window AC blowing warm air? 7 common reasons an AC stops cooling, quick checks you can do yourself, and when to call a technician.'
 author: 'HKMC Technical Team'
 pubDate: 'Jul 05 2026'
+updatedDate: 'Sep 05 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
@@ -46,3 +47,7 @@ On older units, a weakening compressor can't build enough pressure to cool prope
 If cooling is still weak after these checks, it's time for a proper diagnosis — some of these issues (gas leaks, compressor faults, sensor problems) need the right tools and a trained eye to fix safely. If the unit is old and this isn't its first issue, our [repair or replace calculator](/tools/repair-or-replace-calculator/) can help you decide which makes more sense.
 
 **Need a technician in Bangalore?** [Book an AC repair](/#book) and we'll have someone at your door, usually the same day.
+
+## Sources
+
+- AC energy-efficiency ratings that dictate how much cooling capacity you get per watt of input: [BEE Star Labelling Programme](https://www.beestarlabel.com/), Bureau of Energy Efficiency (Government of India).

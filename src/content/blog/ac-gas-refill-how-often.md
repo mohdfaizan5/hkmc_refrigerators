@@ -3,6 +3,7 @@ title: 'How Often Does an AC Actually Need a Gas Refill?'
 description: "'AC gas refill' is a top search term — but needing one every year signals a leak, not routine maintenance. Here's what's actually normal."
 author: 'HKMC Technical Team'
 pubDate: 'Jul 30 2026'
+updatedDate: 'Sep 05 2026'
 heroImage: '../../assets/blog-placeholder-1.jpg'
 ---
 
@@ -37,3 +38,8 @@ A **general service** (cleaning filters, coils, and checking drainage) is recomm
 Weak cooling isn't always a gas issue, either — see our [full list of common AC-not-cooling causes](/blog/ac-not-cooling-common-causes/) if a refill turns out not to be the problem.
 
 **Suspect a gas leak?** [Book an AC service](/#book) and we'll run a proper diagnosis — including leak detection — before recommending a refill.
+
+## Sources
+
+- R22 phase-out timeline and international framework: [UNEP Ozone Secretariat — Montreal Protocol](https://ozone.unep.org/), which India is a party to via the Kigali Amendment.
+- Refrigerant safety and handling standards in India: [Bureau of Indian Standards (BIS)](https://www.bis.gov.in/).

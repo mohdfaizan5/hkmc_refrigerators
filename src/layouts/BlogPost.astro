@@ -10,7 +10,7 @@ import { BRAND_NAME } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, author, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, author, pubDate, updatedDate, heroImage, howToSteps } = Astro.props;
 
 const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
 const heroImageURL = heroImage ? new URL(heroImage.src, Astro.url).toString() : undefined;
@@ -38,6 +38,26 @@ const blogPostingSchema = {
 	},
 };
 
+// HowTo schema is emitted only when the post's frontmatter declared howToSteps.
+// Each step becomes a HowToStep with a name and text — Google's rich result
+// picks this up for step-by-step results, and AI answer engines get an
+// ordered, machine-readable instruction set they can lift into an answer.
+const howToSchema = howToSteps
+	? {
+			'@context': 'https://schema.org',
+			'@type': 'HowTo',
+			name: title,
+			description,
+			...(heroImageURL && { image: heroImageURL }),
+			step: howToSteps.map((s, i) => ({
+				'@type': 'HowToStep',
+				position: i + 1,
+				name: s.name,
+				text: s.text,
+			})),
+		}
+	: null;
+
 const breadcrumbSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'BreadcrumbList',
@@ -53,6 +73,7 @@ const breadcrumbSchema = {
 	<head>
 		<BaseHead title={title} description={description} image={heroImage} />
 		<script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+		{howToSchema && <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />}
 		<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 		<style>
 			main {

@@ -14,7 +14,8 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
 } from "../../consts";
-import { getService, serviceCategories } from "../../data/services";
+import { getService, serviceCategories, serviceFaqs } from "../../data/services";
+import ServiceFAQ from "@/components/ServiceFAQ.astro";
 import TestimonialSimple from "@/components/TestimonialSimple.astro";
 
 const service = getService("ac-repair")!;
@@ -67,7 +68,7 @@ const breadcrumbSchema = {
 <!doctype html>
 <html lang="en-IN">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={service.image} />
     <script
       type="application/ld+json"
       set:html={JSON.stringify(serviceSchema)}
@@ -195,6 +196,7 @@ const breadcrumbSchema = {
       
       <TestimonialSimple />
 
+      <ServiceFAQ faqs={serviceFaqs[service.slug] ?? []} />
 
       <!-- Other services -->
       <section class="bg-zinc-50 py-16 lg:py-24">
